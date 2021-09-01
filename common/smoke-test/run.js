@@ -28,6 +28,10 @@ async function main() {
 
     for (let targetSample of jsFiles) {
       const sampleModule = require(`${entry.SamplesDirectory}/${targetSample}`);
+      console.log('hihih');
+      console.log(`${entry.SamplesDirectory}/${targetSample}`)
+      console.log(sampleModule)
+      console.log(sampleModule.main)
       samplesToExecute.push({
         entrypoint: sampleModule.main,
         name: entry.Name,
@@ -102,7 +106,7 @@ async function executeSample(sample) {
 // logs error messages.
 if (process.argv[2] == "--devops-logging") {
   const oldConsoleError = console.error;
-  console.error = function() {
+  console.error = function () {
     // Mutate arguments to use new warning format
     arguments[0] = `##vso[task.logissue type=error]${arguments[0]}`;
     oldConsoleError.call(this, ...arguments);
